@@ -17,4 +17,15 @@ public class Email {
   public String toString() {
     return this.email;
   }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null || getClass() != obj.getClass())
+      return false;
+
+    Email other = (Email) obj;
+    return this.email.equals(other.email);
+  }
 }
