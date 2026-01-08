@@ -1,4 +1,4 @@
-package com.api.app.domain.user.dto;
+package com.api.app.application.usecases.user.dto;
 
 public final class TokenDTO {
   private final String id;

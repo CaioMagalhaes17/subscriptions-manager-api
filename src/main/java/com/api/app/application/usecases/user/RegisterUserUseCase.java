@@ -1,6 +1,6 @@
 package com.api.app.application.usecases.user;
 
-import com.api.app.domain.user.dto.TokenDTO;
+import com.api.app.application.usecases.user.dto.TokenDTO;
 import com.api.app.domain.user.entity.User;
 import com.api.app.domain.user.exceptions.EmailAlreadyInUseException;
 import com.api.app.domain.user.gateways.PasswordHasher;
