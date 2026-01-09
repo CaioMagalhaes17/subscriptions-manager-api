@@ -30,7 +30,6 @@ public class InMemoryUserRepository implements IUserRepository {
 
   @Override
   public Optional<User> findById(UUID id) {
-    return Optional.empty();
+    return this.users.stream().filter(u -> u.getId().equals(id)).findFirst();
   }
-
 }

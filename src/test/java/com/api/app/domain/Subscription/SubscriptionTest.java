@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
+import com.api.app.domain.Subscription.factories.SubscriptionFactory;
 import com.api.app.domain.subscription.entity.Subscription;
 import com.api.app.domain.subscription.enums.SubscriptionCategory;
 import com.api.app.domain.subscription.enums.SubscriptionStatus;
@@ -16,8 +17,8 @@ public class SubscriptionTest {
   @Test
   void shouldCreateSubscriptionSuccessfully() {
     User user = UserFactory.makeUser("Caio", "caio@gmail.com");
-    Subscription subscription = new Subscription("Netflix", user, SubscriptionCategory.STREAMING,
-        SubscriptionStatus.ACTIVE, 2540, LocalDate.now(), "25");
+    Subscription subscription = SubscriptionFactory.makeSubscription("Netflix", user, SubscriptionCategory.STREAMING,
+        SubscriptionStatus.ACTIVE, 10, LocalDate.now(), "25");
     assertNotNull(subscription);
     assertNotNull(subscription.getId());
   }
