@@ -10,9 +10,11 @@ import com.api.app.domain.user.entity.User;
 public interface ISubscriptionRepository {
   void save(Subscription subscription);
 
+  void delete(UUID id);
+
   Optional<Subscription> findById(UUID id);
 
-  Optional<Subscription> findByName(String name);
+  List<Subscription> findByName(String name);
 
   List<Subscription> findByUser(User user);
 }

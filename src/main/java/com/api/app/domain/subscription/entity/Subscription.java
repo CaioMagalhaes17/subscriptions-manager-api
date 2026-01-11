@@ -2,11 +2,14 @@ package com.api.app.domain.subscription.entity;
 
 import java.time.Instant;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import com.api.app.domain.subscription.enums.SubscriptionCategory;
 import com.api.app.domain.subscription.enums.SubscriptionStatus;
 import com.api.app.domain.subscription.exceptions.InvalidSubscriptionValues;
+import com.api.app.domain.subscription.valueobject.Aggregate;
 import com.api.app.domain.user.entity.User;
 
 public class Subscription {
@@ -18,6 +21,7 @@ public class Subscription {
   private Integer price;
   private LocalDate assignedDate;
   private String paymentDay;
+  private List<Aggregate> aggregates = new ArrayList<>();
   private final Instant createdAt;
   private Instant updatedAt;
 
@@ -33,12 +37,13 @@ public class Subscription {
     this.paymentDay = paymentDay;
     this.createdAt = Instant.now();
     this.updatedAt = null;
+    this.aggregates = new ArrayList<>();
     this.validate();
   }
 
   public Subscription(UUID id, User user, String name, SubscriptionCategory category, SubscriptionStatus status,
       Integer price,
-      LocalDate assignedDate, String paymentDay, Instant createdAt, Instant updatedAt) {
+      LocalDate assignedDate, String paymentDay, List<Aggregate> aggregates, Instant createdAt, Instant updatedAt) {
     this.id = id;
     this.name = name;
     this.user = user;
@@ -47,6 +52,7 @@ public class Subscription {
     this.price = price;
     this.assignedDate = assignedDate;
     this.paymentDay = paymentDay;
+    this.aggregates = aggregates;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
   }
@@ -75,6 +81,24 @@ public class Subscription {
     if (this.paymentDay == null) {
       throw new InvalidSubscriptionValues("Invalid Subscription paymentDay");
     }
+  }
+
+  public void addAggregate(Aggregate aggregate) {
+    this.aggregates.add(aggregate);
+    this.touch();
+  }
+
+  public void updateAggregate(Aggregate aggregate) {
+    Aggregate existing = this.aggregates.stream().filter(a -> a.getName().equals(aggregate.getName())).findFirst()
+        .orElseThrow();
+    this.aggregates.remove(existing);
+    this.aggregates.add(aggregate);
+    this.touch();
+  }
+
+  public void removeAggregate(Aggregate aggregate) {
+    this.aggregates.remove(aggregate);
+    this.touch();
   }
 
   public void changeName(String name) {
@@ -133,6 +157,10 @@ public class Subscription {
 
   public LocalDate getAssignedDate() {
     return assignedDate;
+  }
+
+  public List<Aggregate> getAggregates() {
+    return this.aggregates;
   }
 
   public String getPaymentDay() {
