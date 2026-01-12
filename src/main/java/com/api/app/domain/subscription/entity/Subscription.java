@@ -22,11 +22,12 @@ public class Subscription {
   private LocalDate assignedDate;
   private String paymentDay;
   private List<Aggregate> aggregates = new ArrayList<>();
+  private PaymentMethod paymentMethod;
   private final Instant createdAt;
   private Instant updatedAt;
 
   public Subscription(String name, User user, SubscriptionCategory category, SubscriptionStatus status, Integer price,
-      LocalDate assignedDate, String paymentDay) {
+      LocalDate assignedDate, String paymentDay, PaymentMethod paymentMethod) {
     this.id = UUID.randomUUID();
     this.user = user;
     this.name = name;
@@ -38,12 +39,14 @@ public class Subscription {
     this.createdAt = Instant.now();
     this.updatedAt = null;
     this.aggregates = new ArrayList<>();
+    this.paymentMethod = paymentMethod;
     this.validate();
   }
 
   public Subscription(UUID id, User user, String name, SubscriptionCategory category, SubscriptionStatus status,
       Integer price,
-      LocalDate assignedDate, String paymentDay, List<Aggregate> aggregates, Instant createdAt, Instant updatedAt) {
+      LocalDate assignedDate, String paymentDay, List<Aggregate> aggregates, Instant createdAt, Instant updatedAt,
+      PaymentMethod paymentMethod) {
     this.id = id;
     this.name = name;
     this.user = user;
@@ -55,6 +58,7 @@ public class Subscription {
     this.aggregates = aggregates;
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
+    this.paymentMethod = paymentMethod;
   }
 
   private void validate() {
@@ -157,6 +161,10 @@ public class Subscription {
 
   public LocalDate getAssignedDate() {
     return assignedDate;
+  }
+
+  public PaymentMethod getPaymentMethod() {
+    return this.paymentMethod;
   }
 
   public List<Aggregate> getAggregates() {

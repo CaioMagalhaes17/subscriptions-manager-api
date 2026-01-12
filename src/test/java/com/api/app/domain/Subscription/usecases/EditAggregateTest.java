@@ -12,6 +12,7 @@ import com.api.app.application.usecases.subscription.AddAggregate;
 import com.api.app.application.usecases.subscription.EditAggregate;
 import com.api.app.domain.Subscription.factories.SubscriptionFactory;
 import com.api.app.domain.Subscription.repository.InMemorySubscriptionRepository;
+import com.api.app.domain.subscription.entity.PaymentMethod;
 import com.api.app.domain.subscription.entity.Subscription;
 import com.api.app.domain.subscription.enums.SubscriptionCategory;
 import com.api.app.domain.subscription.enums.SubscriptionStatus;
@@ -36,7 +37,7 @@ public class EditAggregateTest {
     User user = UserFactory.makeUser("user", "user@gmail.com");
 
     Subscription subscription = SubscriptionFactory.makeSubscription("Netflix", user, SubscriptionCategory.STREAMING,
-        SubscriptionStatus.ACTIVE, 10, LocalDate.now(), "25");
+        SubscriptionStatus.ACTIVE, 10, LocalDate.now(), "25", PaymentMethod.CARD);
     this.subscriptionRepository.save((subscription));
     this.addAggregateUseCase.execute(subscription.getId(), new Aggregate("Joao", 0.33, LocalDate.now()));
     assertNotNull(subscription.getAggregates());

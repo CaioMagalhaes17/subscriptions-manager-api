@@ -3,6 +3,7 @@ package com.api.app.application.usecases.subscription.dto;
 import java.time.LocalDate;
 import java.util.UUID;
 
+import com.api.app.domain.subscription.entity.PaymentMethod;
 import com.api.app.domain.subscription.enums.SubscriptionCategory;
 import com.api.app.domain.subscription.enums.SubscriptionStatus;
 
@@ -14,10 +15,11 @@ public final class AddSubscriptionDTO {
   private final Integer price;
   private final LocalDate assignedDate;
   private final String paymentDay;
+  private final PaymentMethod paymentMethod;
 
   public AddSubscriptionDTO(
       String name, UUID userId, SubscriptionCategory category, SubscriptionStatus status, Integer price,
-      LocalDate assignedDate, String paymentDay) {
+      LocalDate assignedDate, String paymentDay, PaymentMethod paymentMethod) {
     this.assignedDate = assignedDate;
     this.category = category;
     this.name = name;
@@ -25,6 +27,7 @@ public final class AddSubscriptionDTO {
     this.price = price;
     this.status = status;
     this.userId = userId;
+    this.paymentMethod = paymentMethod;
   }
 
   public String getName() {
@@ -33,6 +36,10 @@ public final class AddSubscriptionDTO {
 
   public UUID getUserId() {
     return userId;
+  }
+
+  public PaymentMethod getpaPaymentMethod() {
+    return this.paymentMethod;
   }
 
   public SubscriptionCategory getCategory() {

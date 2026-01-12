@@ -20,7 +20,7 @@ public class AddSubscription {
   public void execute(AddSubscriptionDTO payload) {
     User user = this.userRepository.findById(payload.getUserId()).orElseThrow(UserNotFoundException::new);
     Subscription subscription = new Subscription(payload.getName(), user, payload.getCategory(), payload.getStatus(),
-        payload.getPrice(), payload.getAssignedDate(), payload.getPaymentDay());
+        payload.getPrice(), payload.getAssignedDate(), payload.getPaymentDay(), payload.getpaPaymentMethod());
     this.subscriptionRepository.save(subscription);
   }
 }
