@@ -17,6 +17,13 @@ public final class Password {
     return new Password(hash);
   }
 
+  public static Password fromHash(String hash) {
+    if (hash == null || hash.isBlank()) {
+      throw new IllegalArgumentException("Password hash inválido");
+    }
+    return new Password(hash);
+  }
+
   public boolean matches(
       String plainPassword,
       PasswordHasher hasher) {
