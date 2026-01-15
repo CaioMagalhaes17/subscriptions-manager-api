@@ -1,14 +1,17 @@
-# 1. imagem com Java
-FROM eclipse-temurin:21-jdk-alpine
+FROM maven:3.9.9-eclipse-temurin-17 AS build
+WORKDIR /build
 
-# 2. diretório de trabalho
+COPY pom.xml .
+RUN mvn dependency:go-offline
+
+COPY src ./src
+RUN mvn clean package -DskipTests
+
+# ===== RUNTIME =====
+FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 
-# 3. copia o jar
-COPY target/*.jar app.jar
+COPY --from=build /build/target/*.jar app.jar
 
-# 4. expõe a porta da aplicação
 EXPOSE 8080
-
-# 5. comando de start
 ENTRYPOINT ["java", "-jar", "app.jar"]
