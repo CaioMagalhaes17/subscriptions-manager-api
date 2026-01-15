@@ -11,8 +11,7 @@ import com.api.app.infra.persistance.mongodb.user.repository.UserRepository;
 public class UserDatabase {
   @Bean
   IUserRepository userRepository(
-    UserMongoRepository userMongoRepository
-  ){
+      UserMongoRepository userMongoRepository) {
     return new UserRepository(userMongoRepository);
   }
 }
