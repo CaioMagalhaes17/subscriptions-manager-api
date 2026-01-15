@@ -1,4 +1,4 @@
-package com.api.app.infra.config;
+package com.api.app.infra.config.user;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
