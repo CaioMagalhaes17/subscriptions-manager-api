@@ -32,6 +32,6 @@ public final class Password {
 
   @Override
   public String toString() {
-    return "******"; // nunca exponha
+    return this.hash;
   }
 }

@@ -16,6 +16,7 @@ public class User {
   private Instant updatedAt;
 
   public User(String name, Email email, Password password) {
+    System.out.println(password);
     this.id = UUID.randomUUID();
     this.name = name;
     this.email = email;

@@ -3,4 +3,4 @@ server:
 
 spring:
   mongodb:
-    uri: ${MONGODB_URI}
+    uri: mongodb+srv://dbcell:B5HpXQTZgeMEkWeZ@cluster0.pqmup.mongodb.net/subscriptions

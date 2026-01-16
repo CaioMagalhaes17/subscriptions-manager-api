@@ -45,7 +45,7 @@ public class ReadExtractUseCase {
           PaymentMethod.CARD 
         );
         this.subscriptionRepository.save(subscriptionEntity);
-        return subscriptionEntity
+        return subscriptionEntity;
       }
     ).collect(Collectors.toList());
   }
