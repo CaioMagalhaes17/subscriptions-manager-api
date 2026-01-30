@@ -5,7 +5,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import com.api.app.domain.subscription.entity.Subscription;
-import com.api.app.domain.user.entity.User;
+import com.api.app.domain.subscription.valueobject.UserId;
 
 public interface ISubscriptionRepository {
   void save(Subscription subscription);
@@ -16,5 +16,5 @@ public interface ISubscriptionRepository {
 
   List<Subscription> findByName(String name);
 
-  List<Subscription> findByUser(User user);
+  List<Subscription> findByUserId(UserId userId);
 }

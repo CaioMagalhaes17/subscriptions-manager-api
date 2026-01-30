@@ -17,6 +17,7 @@ import com.api.app.domain.subscription.entity.PaymentMethod;
 import com.api.app.domain.subscription.entity.Subscription;
 import com.api.app.domain.subscription.enums.SubscriptionCategory;
 import com.api.app.domain.subscription.enums.SubscriptionStatus;
+import com.api.app.domain.subscription.valueobject.UserId;
 import com.api.app.domain.user.UserFactory;
 import com.api.app.domain.user.entity.User;
 
@@ -34,7 +35,7 @@ public class EditSubscriptionTest {
   void shouldEditSubscription() {
     User user = UserFactory.makeUser("user", "user@gmail.com");
 
-    Subscription subscription = SubscriptionFactory.makeSubscription("Netflix", user, SubscriptionCategory.STREAMING,
+    Subscription subscription = SubscriptionFactory.makeSubscription("Netflix", UserId.of(user.getId()), SubscriptionCategory.STREAMING,
         SubscriptionStatus.ACTIVE, 10, LocalDate.now(), "25", PaymentMethod.CARD);
     this.subscriptionRepository.save((subscription));
     EditSubscriptionDTO payload = new EditSubscriptionDTO(null, null, SubscriptionStatus.CANCELED, null, null, null);
@@ -49,7 +50,7 @@ public class EditSubscriptionTest {
   void shouldNotBeAllowedToDeleteSubscription() {
     User user = UserFactory.makeUser("user", "user@gmail.com");
     User user2 = UserFactory.makeUser("user2", "user2@gmail.com");
-    Subscription subscription = SubscriptionFactory.makeSubscription("Netflix", user, SubscriptionCategory.STREAMING,
+    Subscription subscription = SubscriptionFactory.makeSubscription("Netflix", UserId.of(user.getId()), SubscriptionCategory.STREAMING,
         SubscriptionStatus.ACTIVE, 10, LocalDate.now(), "25", PaymentMethod.CARD);
     this.subscriptionRepository.save((subscription));
     EditSubscriptionDTO payload = new EditSubscriptionDTO(null, null, SubscriptionStatus.CANCELED, null, null, null);

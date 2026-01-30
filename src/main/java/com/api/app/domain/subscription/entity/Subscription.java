@@ -10,11 +10,11 @@ import com.api.app.domain.subscription.enums.SubscriptionCategory;
 import com.api.app.domain.subscription.enums.SubscriptionStatus;
 import com.api.app.domain.subscription.exceptions.InvalidSubscriptionValues;
 import com.api.app.domain.subscription.valueobject.Aggregate;
-import com.api.app.domain.user.entity.User;
+import com.api.app.domain.subscription.valueobject.UserId;
 
 public class Subscription {
   private final UUID id;
-  private final User user;
+  private final UserId userId;
   private String name;
   private SubscriptionCategory category;
   private SubscriptionStatus status;
@@ -26,10 +26,10 @@ public class Subscription {
   private final Instant createdAt;
   private Instant updatedAt;
 
-  public Subscription(String name, User user, SubscriptionCategory category, SubscriptionStatus status, Integer price,
+  public Subscription(String name, UserId userId, SubscriptionCategory category, SubscriptionStatus status, Integer price,
       LocalDate assignedDate, String paymentDay, PaymentMethod paymentMethod) {
     this.id = UUID.randomUUID();
-    this.user = user;
+    this.userId = userId;
     this.name = name;
     this.category = category;
     this.status = status;
@@ -43,13 +43,13 @@ public class Subscription {
     this.validate();
   }
 
-  public Subscription(UUID id, User user, String name, SubscriptionCategory category, SubscriptionStatus status,
+  public Subscription(UUID id, UserId userId, String name, SubscriptionCategory category, SubscriptionStatus status,
       Integer price,
       LocalDate assignedDate, String paymentDay, List<Aggregate> aggregates, Instant createdAt, Instant updatedAt,
       PaymentMethod paymentMethod) {
     this.id = id;
     this.name = name;
-    this.user = user;
+    this.userId = userId;
     this.category = category;
     this.status = status;
     this.price = price;
@@ -183,7 +183,7 @@ public class Subscription {
     return updatedAt;
   }
 
-  public User getUser() {
-    return user;
+  public UserId getUserId() {
+    return userId;
   }
 }

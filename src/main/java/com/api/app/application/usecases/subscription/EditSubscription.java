@@ -20,7 +20,7 @@ public class EditSubscription {
     Subscription subscription = this.subscriptionRepository.findById(id)
         .orElseThrow(SubscriptionNotFoundException::new);
 
-    if (!userId.equals(subscription.getUser().getId())) {
+    if (!userId.equals(subscription.getUserId().value())) {
       throw new SubscribeActionNotAllowed();
     }
     if (payload.getAssignedDate() != null) {

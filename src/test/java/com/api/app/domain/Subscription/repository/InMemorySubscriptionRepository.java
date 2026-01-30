@@ -8,7 +8,7 @@ import java.util.UUID;
 import com.api.app.application.usecases.subscription.exceptions.SubscriptionNotFoundException;
 import com.api.app.domain.subscription.entity.Subscription;
 import com.api.app.domain.subscription.repository.ISubscriptionRepository;
-import com.api.app.domain.user.entity.User;
+import com.api.app.domain.subscription.valueobject.UserId;
 
 public class InMemorySubscriptionRepository implements ISubscriptionRepository {
   private List<Subscription> subscriptions = new ArrayList<>();
@@ -24,8 +24,8 @@ public class InMemorySubscriptionRepository implements ISubscriptionRepository {
   }
 
   @Override
-  public List<Subscription> findByUser(User user) {
-    return this.subscriptions.stream().filter(subscription -> subscription.getUser().equals(user)).toList();
+  public List<Subscription> findByUserId(UserId userId) {
+    return this.subscriptions.stream().filter(subscription -> subscription.getUserId().equals(userId)).toList();
   }
 
   @Override

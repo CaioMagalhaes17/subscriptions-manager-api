@@ -13,6 +13,7 @@ import com.api.app.domain.Subscription.repository.InMemorySubscriptionRepository
 import com.api.app.domain.subscription.entity.PaymentMethod;
 import com.api.app.domain.subscription.enums.SubscriptionCategory;
 import com.api.app.domain.subscription.enums.SubscriptionStatus;
+import com.api.app.domain.subscription.valueobject.UserId;
 import com.api.app.domain.user.InMemoryUserRepository;
 import com.api.app.domain.user.UserFactory;
 import com.api.app.domain.user.entity.User;
@@ -26,7 +27,7 @@ public class AddSubscriptionTest {
   void setUp() {
     this.subscriptionRepository = new InMemorySubscriptionRepository();
     this.userRepository = new InMemoryUserRepository();
-    this.useCase = new AddSubscription(subscriptionRepository, userRepository);
+    this.useCase = new AddSubscription(subscriptionRepository);
   }
 
   @Test
@@ -37,7 +38,7 @@ public class AddSubscriptionTest {
         SubscriptionCategory.STREAMING,
         SubscriptionStatus.ACTIVE, 10, LocalDate.now(), "25", PaymentMethod.CARD));
 
-    assertNotNull(this.subscriptionRepository.findByUser(user).stream().filter(sub -> sub.getName().equals("Netflix"))
+    assertNotNull(this.subscriptionRepository.findByUserId(UserId.of(user.getId())).stream().filter(sub -> sub.getName().equals("Netflix"))
         .findFirst());
   }
 }
